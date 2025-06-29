@@ -9,12 +9,15 @@ import java.util.Map;
 
 public class ID {
     private final Map<Integer, Map<Integer, List<String>>> IDs = new HashMap<>();
-    private final Integer length;
+    private final int length;
+    private volatile Iterator<String> followedIDs;
+    private volatile boolean closed;
+
     public ID() throws FileNotFoundException {
         length = fill();
     }
 
-    public Integer getLength() {
+    public int getLength() {
         return length;
     }
 
@@ -47,10 +50,21 @@ public class ID {
         return l;
     }
 
-    public Integer getTime(Integer key) {
+    public Integer getTime(int key) {
         Iterator<Integer> iterator = IDs.get(key).keySet().iterator();
         if (iterator.hasNext())
             return iterator.next();
         return null;
     }
+
+    public int getNextFollowedID(int key) {
+        if (followedIDs == null) followedIDs = IDs.get(key).entrySet().iterator().next().getValue().iterator();
+        if (followedIDs.hasNext()) return Integer.parseInt(followedIDs.next());
+        else {
+            followedIDs = null;
+            return 0;
+        }
+    }
 }
+
+

@@ -21,13 +21,20 @@ List<String>>> IDs = new HashMap<>()***
 
 ## Methods:
 
-### public Integer getTime(Integer key)
+### public Integer getTime(int key)
 Method is public, it accepts **Integer key** parameter
 to get time of Thread work time
 
-### public Integer getLength()
-Method is public, it returns ***private final 
+### ~~public Integer getLength()~~
+
+### public int getLength()
+Method is public, it returns ***private final
 Integer length*** that contains quantity of lines in file
+
+
+### public int getNextFollowedID(int key)
+Method is public, it uses an iterator and returns 0 if 
+iterator !hasNext()
 
 
 
