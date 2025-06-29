@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ public class ID {
     private final Integer length;
     public ID() throws FileNotFoundException {
         length = fill();
-
     }
 
     public Integer getLength() {
@@ -47,7 +47,10 @@ public class ID {
         return l;
     }
 
-    public Integer getTime(Object key) {
-        return IDs.get(key).keySet().iterator().next();
+    public Integer getTime(Integer key) {
+        Iterator<Integer> iterator = IDs.get(key).keySet().iterator();
+        if (iterator.hasNext())
+            return iterator.next();
+        return null;
     }
 }
