@@ -1,16 +1,37 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        ID id = new ID();
-        System.out.println(id.getTime(1));
-        System.out.println(id.getTime(2));
-        System.out.println(id.getLength());
-        for (int i = 0; i < id.getLength(); i++) {
-            Thread thread = new Thread(String.valueOf(i));
+    static ID id;
+
+    static {
+        try {
+            id = new ID();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        Integer n;
-        while ((n = id.getNextFollowedID(6)) != 0) System.out.println(n);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        List<TimerThreads> threads = new ArrayList<>();
+        for (int i = 1; i < id.getLength(); i++)
+            threads.add(new TimerThreads(i, id, false));
+        getRootFollowedID(7, 0);
+        threads.forEach(thread -> {
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(thread.getTime());
+        });
+    }
+    public static int getRootFollowedID(int key, int sum) {
+        if (id.getNextFollowedID(key) != 0)
+            return getRootFollowedID(id.getNextFollowedID(key), sum += id.getTime(key));
+        return sum + id.getTime(key);
     }
 }
 
