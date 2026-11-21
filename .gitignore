@@ -25,7 +25,59 @@ bin/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
 
 ### Mac OS ###
 .DS_Store
+
+# Generated IDE state and local request-tool data
+.idea/
+.fastRequest/
+*.iml
+*.iws
+
+# Build outputs and local build caches
+.gradle/
+.kotlin/
+**/build/
+**/out/
+**/target/
+!**/src/**/build/
+!**/src/**/out/
+!**/src/**/target/
+.externalNativeBuild/
+.cxx/
+.cmake/
+cmake-build-*/
+local.properties
+
+# Downloaded dependencies and language caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.next/
+.nuxt/
+.turbo/
+
+# Xcode local state and generated products
+xcuserdata/
+DerivedData/
+*.xcuserstate
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+Pods/
+
+# Operating system and temporary files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
